@@ -1,166 +1,35 @@
-### Chess AI
+# Chess AI
 
-A powerful Chess AI leveraging TensorFlow and Stockfish to play and improve at chess through self-play and reinforcement learning.
+A chess engine that learns from self play, with two implementations in this repo: one in Python using TensorFlow, and one in C++. It can use Stockfish as a training opponent and reference.
 
-## Table of Contents
+## Layout
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-  - [Python Installation](#python-installation)
-  - [C++ Installation](#c-installation)
-- [Usage](#usage)
-  - [Python Usage](#python-usage)
-  - [C++ Usage](#c-usage)
-- [Training](#training)
-  - [Python Training](#python-training)
-  - [C++ Training](#c-training)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+- `V-Python`: the Python version. Contains the model and training code (`Ai`) and rating tools (`rating`).
+- `V-Cpp`: the C++ version, as a Visual Studio solution (`ChessBot.sln`).
 
-## Introduction
+## Python version
 
-This Chess AI project integrates TensorFlow for machine learning and Stockfish, one of the strongest open-source chess engines, to create robust AIs capable of playing and learning chess. Each version uses a different programming language: Python for rapid prototyping and C++ for performance-critical applications.
+Requirements are pinned in `requirements.txt`:
 
-## Features
+- numpy 1.22.0
+- tensorflow 2.8.0
+- keras-tuner 1.1.0
+- python-chess 0.31.3
 
-- **Neural Network**: Utilizes TensorFlow for Python and a custom-built neural network for C++.
-- **Stockfish Integration**: Integrated for both versions to assist in move selection and validation.
-- **Self-Play**: AI improves through self-play in both Python and C++ implementations.
-- **Attention Mechanism**: Python version incorporates Bahdanau attention mechanism; C++ version focuses on performance enhancements.
-- **Hyperparameter Tuning**: Employs Keras Tuner for Python and manual tuning for C++.
-- **Data Management**: Python version automatically saves game data; C++ version manages data for analysis and retraining.
+Set up and install:
 
-## Installation
-
-### Python Installation
-
-#### Prerequisites
-
-- Python 3.6+
-- TensorFlow 2.x
-- Stockfish engine
-- Other dependencies listed in `requirements.txt`
-
-#### Steps
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/germanProgq/Chess_Bot
-   cd Chess_Bot
-   cd V-Python
-   ```
-
-2. **Create a virtual environment:**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-3. **Install the dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Download and set up Stockfish:**
-   - Download Stockfish from [official site](https://stockfishchess.org/download/)
-   - Place the executable in the `stockfish` folder or specify the path in your code.
-
-### C++ Installation
-
-#### Prerequisites
-
-- C++ compiler supporting C++11
-- TensorFlow C++ API
-- Stockfish engine
-- Additional libraries as listed in `requirements.txt`
-
-#### Steps
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/germanProgq/Chess_Bot
-   cd Chess_Bot
-   cd V-Cpp
-   ```
-
-2. **Build the project:**
-   ```bash
-   mkdir build
-   cd build
-   cmake ..
-   make
-   ```
-
-3. **Download and set up Stockfish:**
-   - Download Stockfish from [official site](https://stockfishchess.org/download/)
-   - Place the executable in the appropriate folder or specify the path in your code.
-
-## Usage
-
-### Python Usage
-
-#### Playing a Game
-
-To play a game against the AI, run:
 ```bash
-in progress
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-#### Training the AI
+From there you can run the training and play scripts under `V-Python/Ai`. The model improves through self play and reinforcement learning. Stockfish is used as an opponent during training, so you need a Stockfish binary available if you want that path.
 
-To train the AI using self-play and Stockfish, run:
-```bash
-python bot/chess_bot.py
-```
+## C++ version
 
-### C++ Usage
+Open `V-Cpp/ChessBot.sln` in Visual Studio and build the solution. It mirrors the same idea in C++.
 
-#### Playing a Game
+## Notes
 
-To play a game against the AI, run:
-```bash
-./Chess_Bot_cpp
-```
-
-#### Training the AI
-
-Currently in progress...
-
-## Training
-
-### Python Training
-
-The Python training process involves playing multiple games between the AI and Stockfish, collecting data, and using that data to improve the neural network. Key steps include:
-
-1. **Self-Play**: AI plays games against itself or Stockfish to generate training data.
-2. **Data Collection**: States, actions, and rewards are saved for each game.
-3. **Model Training**: The neural network is trained using the collected data.
-4. **Evaluation**: The model is evaluated and improved iteratively.
-
-### C++ Training
-
-Training involves iterative improvement using self-play and reinforcement learning techniques.
-
-## Contributing
-
-We welcome contributions! Here’s how you can help:
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature-branch-name`.
-3. Make your changes and commit them: `git commit -m 'Add some feature'`.
-4. Push to the branch: `git push origin feature-branch-name`.
-5. Open a pull request.
-
-Please make sure your contributions adhere to our [code of conduct](CODE_OF_CONDUCT.md).
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- [Stockfish Chess Engine](https://stockfishchess.org/)
-- [TensorFlow](https://www.tensorflow.org/)
-- [Keras Tuner](https://keras.io/keras_tuner/)
+This is a learning project for building a chess engine and training it over time. Results depend on how long you train and the hardware you use.
